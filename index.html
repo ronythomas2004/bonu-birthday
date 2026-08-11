@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday, Boni 💙</title>
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💙</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500;1,9..144,600&family=Caveat:wght@500;700&family=Outfit:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- Interactive background particle canvas -->
+  <canvas id="particleCanvas" class="particle-canvas" aria-hidden="true"></canvas>
+
+
+
+  <!-- ============ LOCK SCREEN ============ -->
+  <div id="lockScreen" class="lock-screen">
+    <div class="lock-bg-shapes" aria-hidden="true">
+      <span class="drift drift-1"></span>
+      <span class="drift drift-2"></span>
+      <span class="drift drift-3"></span>
+    </div>
+
+    <div class="lock-card">
+      <div class="lock-icon" id="lockIcon">
+        <svg viewBox="0 0 64 64" width="44" height="44" aria-hidden="true">
+          <rect x="14" y="28" width="36" height="28" rx="6" fill="none" stroke="currentColor" stroke-width="3.5" />
+          <path d="M20 28 V20 a12 12 0 0 1 24 0 v8" fill="none" stroke="currentColor" stroke-width="3.5"
+            stroke-linecap="round" />
+          <circle cx="32" cy="40" r="3.5" fill="currentColor" />
+          <path d="M32 43 v6" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" />
+        </svg>
+      </div>
+      <p class="lock-eyebrow">a little something for</p>
+      <h1 class="lock-name">Boni</h1>
+      <p class="lock-hint">enter the code to open it</p>
+
+      <div class="pin-dots" id="pinDots" aria-hidden="true">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+
+      <input type="tel" inputmode="numeric" pattern="[0-9]*" maxlength="4" id="pinInput" class="pin-input-hidden"
+        autocomplete="off" aria-label="Enter 4 digit code">
+
+      <div class="keypad" id="keypad">
+        <button type="button" class="key" data-key="1">1</button>
+        <button type="button" class="key" data-key="2">2</button>
+        <button type="button" class="key" data-key="3">3</button>
+        <button type="button" class="key" data-key="4">4</button>
+        <button type="button" class="key" data-key="5">5</button>
+        <button type="button" class="key" data-key="6">6</button>
+        <button type="button" class="key" data-key="7">7</button>
+        <button type="button" class="key" data-key="8">8</button>
+        <button type="button" class="key" data-key="9">9</button>
+        <button type="button" class="key key-empty" tabindex="-1" disabled></button>
+        <button type="button" class="key" data-key="0">0</button>
+        <button type="button" class="key key-del" id="keyDel" aria-label="Delete">⌫</button>
+      </div>
+
+      <p class="lock-error" id="lockError">not quite — try again</p>
+    </div>
+
+    <p class="lock-footer">U know how to unlock 😉</p>
+  </div>
+
+  <!-- ============ MAIN SITE ============ -->
+  <main id="mainSite" class="main-site" hidden>
+
+    <canvas id="confettiCanvas" class="confetti-canvas" aria-hidden="true"></canvas>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-sparkles-bg" aria-hidden="true"></div>
+      <div class="floaters" aria-hidden="true">
+        <span class="balloon b1"></span>
+        <span class="balloon b2"></span>
+        <span class="balloon b3"></span>
+        <span class="balloon b4"></span>
+      </div>
+
+      <h1 class="hero-title">Happy Birthday,<br><span class="hero-name">Boni</span></h1>
+      <p class="hero-sub">every year you get one year cooler. unfair, honestly.</p>
+
+      <!-- LIVE FRIENDSHIP COUNTER -->
+      <div class="friendship-timer" id="friendshipTimer">
+        <p class="timer-title">TIME SPENT BEING BESTIES</p>
+        <div class="timer-grid">
+          <div class="timer-unit"><span id="timerDays" class="unit-num">738</span><span class="unit-lbl">Days</span>
+          </div>
+          <div class="timer-unit"><span id="timerHours" class="unit-num">17</span><span class="unit-lbl">Hours</span>
+          </div>
+          <div class="timer-unit"><span id="timerMins" class="unit-num">42</span><span class="unit-lbl">Mins</span>
+          </div>
+          <div class="timer-unit"><span id="timerSecs" class="unit-num">09</span><span class="unit-lbl">Secs</span>
+          </div>
+        </div>
+      </div>
+
+      <a href="#story" class="scroll-cue" aria-label="Scroll to story">
+        <span></span>
+      </a>
+    </section>
+
+    <!-- OUR STORY -->
+    <section id="story" class="story-section reveal">
+      <div class="story-heading">
+        <p class="story-eyebrow">the short version</p>
+        <h2>Our story so far</h2>
+        <p class="story-note">every memory leading up to today</p>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <span class="timeline-dot"></span>
+          <div class="timeline-content">
+            <p class="timeline-date">Year 1</p>
+            <p class="timeline-text">Starting from the train journey never expecting us to be frnds to texting every
+              single day, about nothing and everything. Still not entirely sure how that happened this fast.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-dot"></span>
+          <div class="timeline-content">
+            <p class="timeline-date">The truth or dares</p>
+            <p class="timeline-text">The nytz where we used to know about each other.. From the one who never opened
+              up... u consumed everything</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-dot"></span>
+          <div class="timeline-content">
+            <p class="timeline-date">The one we still bring up</p>
+            <p class="timeline-text">You know the one. The train journey, the t or 's, the chats, the fights,the
+              patch-up's ,the thing that still makes us laugh out of nowhere months later.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-dot"></span>
+          <div class="timeline-content">
+            <p class="timeline-date">The harder days</p>
+            <p class="timeline-text">The ones where you just showed up, no explanation needed. That's the part of
+              friendship people don't put on the highlight reel, but it's the part that matters most.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-dot timeline-dot-active"></span>
+          <div class="timeline-content">
+            <p class="timeline-date">Today</p>
+            <p class="timeline-text">Two years in, and you're still one of the first people I want to tell things to.
+              Here's to a lot more of this.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WAX-SEALED ENVELOPE BIRTHDAY MESSAGE -->
+    <section id="message" class="message-section reveal">
+      <div class="envelope-heading">
+        <p class="envelope-eyebrow">a note written for you</p>
+        <h2>Read your birthday letter</h2>
+        <p class="envelope-hint">tap the wax seal to unseal the letter 🩵</p>
+      </div>
+
+      <div class="envelope-wrapper">
+        <div class="envelope" id="envelope">
+          <div class="envelope-back"></div>
+          <div class="letter-card" id="letterCard">
+            <span class="message-tape" aria-hidden="true"></span>
+            <p class="message-to">To Boni,</p>
+            <div class="message-body" id="messageBody">
+              <p>Two years ago I had no idea how much you'd end up meaning to me — and now I genuinely can't imagine the
+                last two years without you in them. Somewhere between the late-night texts, the random calls for no
+                reason at all, and the plans that always somehow worked out, you became one of my favourite people to
+                know.</p>
+              <p>You have this way of making ordinary days feel like something worth remembering. I don't say it enough,
+                so I'm saying it here, in light blue, because it's your colour: I'm really lucky to have you as my best
+                friend.</p>
+              <p>Here's to another year of chaos, comfort, and everything in between. I hope this year gives you every
+                single thing you deserve — and I hope you know I'll be right here for it, like always.</p>
+            </div>
+            <p class="message-sign">— with love, always 🩵</p>
+          </div>
+          <div class="envelope-front"></div>
+          <div class="envelope-flap" id="envelopeFlap"></div>
+          <div class="wax-seal" id="waxSeal" role="button" tabindex="0" aria-label="Tap wax seal to open letter">
+            <span class="seal-emblem">🩵</span>
+            <span class="seal-text">TAP TO UNSEAL</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3D UNBOXING GIFT -->
+    <section class="gift-section reveal" id="giftSection">
+      <div class="gift-heading">
+        <p class="gift-eyebrow">special delivery for you</p>
+        <h2>Unwrap your present</h2>
+        <p class="gift-note">tap the box to open your surprise package</p>
+      </div>
+
+      <div class="gift-container" id="giftContainer">
+        <div class="gift-box" id="giftBox" role="button" tabindex="0" aria-label="Open birthday gift box">
+          <div class="gift-lid" id="giftLid">
+            <div class="gift-bow">
+              <span class="bow-loop left"></span>
+              <span class="bow-loop right"></span>
+              <span class="bow-knot"></span>
+            </div>
+          </div>
+          <div class="gift-body">
+            <div class="gift-ribbon-v"></div>
+            <div class="gift-ribbon-h"></div>
+          </div>
+        </div>
+        <div class="gift-reveal-card" id="giftRevealCard" hidden>
+          <div class="gift-reveal-badge">🎁 BEST FRIEND CERTIFICATE</div>
+          <h3>Official Lifetime Pass</h3>
+          <p>This certifies that <strong>Boniface</strong> is entitled to 365 days of unconditional support, unlimited
+            catchups, honest outfit checks, and 2 AM emergency laughter calls!</p>
+          <div class="gift-sparkles">✨ 🩵 🎉 👑 ✨</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REASONS -->
+    <section class="reasons-section reveal">
+      <div class="reasons-heading">
+        <p class="reasons-eyebrow">just a few, out of way too many</p>
+        <h2>Reasons you're my person</h2>
+        <p class="reasons-note">tap any card to flip and read</p>
+      </div>
+      <div class="reasons-grid" id="reasonsGrid"></div>
+    </section>
+
+    <!-- MAKE A WISH -->
+    <section class="wish-section reveal">
+      <p class="wish-eyebrow">before you scroll any further</p>
+      <h2 class="wish-title">Make a wish, Boni</h2>
+      <p class="wish-instruction">go on, blow out the candles (tap or blow into mic)</p>
+
+      <div class="cake-wrapper">
+        <button type="button" class="cake" id="cakeButton" aria-label="Blow out the candles">
+          <svg viewBox="0 0 200 180" width="190" height="170" aria-hidden="true" id="cakeSvg">
+            <!-- Plate -->
+            <ellipse cx="100" cy="155" rx="80" ry="16" fill="#DFF1FA" stroke="#AEDCF0" stroke-width="2" />
+            <!-- Bottom Tier -->
+            <rect x="35" y="105" width="130" height="46" rx="10" fill="#FFFFFF" stroke="#AEDCF0" stroke-width="2.5" />
+            <path d="M35 115 Q 67 128, 100 115 T 165 115 L 165 105 L 35 105 Z" fill="#AEDCF0" />
+            <!-- Top Tier -->
+            <rect x="55" y="65" width="90" height="42" rx="8" fill="#F5FAFD" stroke="#AEDCF0" stroke-width="2.5" />
+            <path d="M55 75 Q 77 86, 100 75 T 145 75 L 145 65 L 55 65 Z" fill="#79BEDD" />
+            <!-- Drips -->
+            <circle cx="65" cy="85" r="4" fill="#79BEDD" />
+            <circle cx="100" cy="88" r="5" fill="#79BEDD" />
+            <circle cx="135" cy="84" r="4" fill="#79BEDD" />
+            <!-- 3 Candles -->
+            <!-- Left Candle -->
+            <rect x="68" y="32" width="7" height="34" rx="2.5" fill="#F2C879" />
+            <line x1="71.5" y1="26" x2="71.5" y2="32" stroke="#1A3C4E" stroke-width="2" />
+            <g class="flame-group" id="flame1">
+              <ellipse cx="71.5" cy="18" rx="5.5" ry="9" fill="#FFAE42" class="flame-glow" />
+              <ellipse cx="71.5" cy="19" rx="2.8" ry="5" fill="#FFF066" />
+            </g>
+
+            <!-- Center Candle -->
+            <rect x="96.5" y="24" width="7" height="42" rx="2.5" fill="#AEDCF0" />
+            <line x1="100" y1="18" x2="100" y2="24" stroke="#1A3C4E" stroke-width="2" />
+            <g class="flame-group" id="flame2">
+              <ellipse cx="100" cy="10" rx="6.5" ry="10" fill="#FFAE42" class="flame-glow" />
+              <ellipse cx="100" cy="11" rx="3.2" ry="6" fill="#FFF066" />
+            </g>
+
+            <!-- Right Candle -->
+            <rect x="125" y="32" width="7" height="34" rx="2.5" fill="#F2C879" />
+            <line x1="128.5" y1="26" x2="128.5" y2="32" stroke="#1A3C4E" stroke-width="2" />
+            <g class="flame-group" id="flame3">
+              <ellipse cx="128.5" cy="18" rx="5.5" ry="9" fill="#FFAE42" class="flame-glow" />
+              <ellipse cx="128.5" cy="19" rx="2.8" ry="5" fill="#FFF066" />
+            </g>
+          </svg>
+        </button>
+        <div id="smokeContainer" class="smoke-container" aria-hidden="true"></div>
+      </div>
+
+      <p class="wish-reveal" id="wishReveal" hidden>
+        Whatever you wished for - I hope it finds its way to you this year. And if it doesn't come easy, I'll be right
+        here helping you chase it anyway. 🩵
+      </p>
+
+      <!-- WISH JAR -->
+      <div class="wish-jar-wrapper">
+        <button type="button" id="wishJarBtn" class="wish-jar-btn">
+          <span class="jar-icon">🫙</span>
+          <span>Draw a Birthday Wish Card</span>
+        </button>
+        <div id="wishJarModal" class="wish-jar-modal" hidden>
+          <div class="wish-card-popup">
+            <button type="button" id="closeWishModal" class="wish-modal-close" aria-label="Close">✕</button>
+            <span class="wish-card-stars">✨ 🩵 ✨</span>
+            <p class="wish-card-title">YOUR BIRTHDAY FORTUNE</p>
+            <p id="wishCardContent" class="wish-card-content"></p>
+            <button type="button" id="drawAnotherWishBtn" class="draw-another-btn">Draw Another Wish 🩵</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUOTES
+    <section class="quotes-section reveal" id="quotesSection">
+      <button class="quote-arrow quote-prev" id="quotePrev" aria-label="Previous quote">‹</button>
+      <p class="quote-text" id="quoteText"></p>
+      <button class="quote-arrow quote-next" id="quoteNext" aria-label="Next quote">›</button>
+    </section> -->
+
+    <!-- GROWING UP GALLERY -->
+    <section class="gallery-section reveal">
+      <div class="gallery-heading">
+        <p class="gallery-eyebrow">before I even knew you</p>
+        <h2>Growing up, Boni</h2>
+        <p class="gallery-note">Photos of the kid who became my best friend (tap photo to flip for note)</p>
+      </div>
+      <div class="gallery-grid" id="childhoodGrid"></div>
+    </section>
+
+    <!-- OUR JOURNEY GALLERY -->
+    <section class="journey-section reveal">
+      <div class="gallery-heading">
+        <p class="gallery-eyebrow">the part I got to be in</p>
+        <h2>Our journey</h2>
+        <p class="gallery-note">Photos from the two years I've actually known you (tap photo to flip for note)</p>
+      </div>
+
+      <div class="journey-note-card">
+        <span class="message-tape" aria-hidden="true"></span>
+        <p class="journey-note-title">our journey</p>
+        <p class="journey-note-text" id="journeyMessage">From strangers to best friends in two years - and somehow every
+          one of these photos still makes me laugh, or tear up a little, or both. Thank you for every single memory on
+          this list, and for all the ones we haven't made yet. Photos from the days we met</p>
+      </div>
+
+      <div class="gallery-grid" id="journeyGrid"></div>
+    </section>
+
+    <!-- DOWNLOADABLE CARD -->
+    <section class="card-section reveal">
+      <div class="gallery-heading">
+        <p class="gallery-eyebrow">take this with you</p>
+        <h2>Your birthday card</h2>
+        <p class="gallery-note">download it, keep it, print it, whatever you want</p>
+      </div>
+
+      <!-- Frame selection tools -->
+      <div class="card-controls">
+        <span class="control-label">Card Style:</span>
+        <button type="button" class="style-btn active" data-style="classic">Sky Blue</button>
+        <button type="button" class="style-btn" data-style="gold">Sunset Gold</button>
+        <button type="button" class="style-btn" data-style="starry">Midnight Sparkle</button>
+      </div>
+
+      <canvas id="birthdayCard" class="birthday-card-canvas" width="900" height="600"></canvas>
+      <button type="button" id="downloadCardBtn" class="download-btn">Download card 🩵</button>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <p>made with love, one text at a time, for <strong>Boniface</strong> 🩵</p>
+    </footer>
+
+  </main>
+
+  <!-- ============ LIGHTBOX ============ -->
+  <div id="lightbox" class="lightbox" hidden>
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close">✕</button>
+    <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous photo">‹</button>
+    <img src="" alt="" id="lightboxImg" class="lightbox-img">
+    <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next photo">›</button>
+    <p class="lightbox-caption" id="lightboxCaption"></p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
