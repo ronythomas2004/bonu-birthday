@@ -536,9 +536,9 @@ function launchConfetti() {
   const envelope = document.getElementById("envelope");
   const seal = document.getElementById("waxSeal");
 
-  if (!envelope || !seal) return;
+  if (!envelope) return;
 
-  function toggleEnvelope() {
+  function openEnvelope() {
     if (!envelope.classList.contains("open")) {
       envelope.classList.add("open");
       SoundEngine.playGiftPop();
@@ -546,13 +546,20 @@ function launchConfetti() {
     }
   }
 
-  seal.addEventListener("click", toggleEnvelope);
-  seal.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      toggleEnvelope();
-    }
-  });
+  if (seal) {
+    seal.addEventListener("click", (e) => {
+      e.stopPropagation();
+      openEnvelope();
+    });
+    seal.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        openEnvelope();
+      }
+    });
+  }
+
+  envelope.addEventListener("click", openEnvelope);
 })();
 
 /* =========================================================

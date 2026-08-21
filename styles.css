@@ -630,20 +630,26 @@ img { max-width: 100%; display: block; }
 }
 
 .envelope-wrapper {
-  perspective: 1200px;
+  perspective: 1400px;
   width: 100%;
-  max-width: 620px;
+  max-width: 660px;
+  margin: 0 auto;
 }
 
 .envelope {
   position: relative;
   width: 100%;
-  min-height: 380px;
+  height: 270px;
   background: var(--blue-soft);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-soft);
-  transition: transform 0.3s ease;
+  transition: height 0.6s cubic-bezier(0.4, 0, 0.2, 1), background 0.6s ease;
   cursor: pointer;
+  margin-top: 30px;
+}
+
+.envelope:not(.open) {
+  overflow: hidden;
 }
 
 .envelope-back {
@@ -651,6 +657,7 @@ img { max-width: 100%; display: block; }
   inset: 0;
   background: #C7E6F5;
   border-radius: var(--radius-md);
+  z-index: 1;
 }
 
 .letter-card {
@@ -658,19 +665,51 @@ img { max-width: 100%; display: block; }
   background: var(--white);
   border-radius: var(--radius-md);
   padding: 44px 38px;
-  box-shadow: 0 10px 30px -10px rgba(22,54,74,0.18);
-  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
-  z-index: 2;
+  box-shadow: 0 14px 40px -12px rgba(22,54,74,0.2);
+  border: 1px solid rgba(163, 216, 244, 0.5);
+  transition: opacity 0.6s ease;
 }
 
 .envelope:not(.open) .letter-card {
-  transform: translateY(20px) scale(0.96);
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  height: 230px;
+  overflow: hidden;
+  opacity: 0.3;
+  transform: translateY(40px) scale(0.95);
   pointer-events: none;
+  z-index: 2;
+}
+
+.envelope.open {
+  height: auto;
+  background: transparent;
+  box-shadow: none;
 }
 
 .envelope.open .letter-card {
-  transform: translateY(-10px) scale(1);
+  position: relative;
   z-index: 10;
+  opacity: 1;
+  pointer-events: auto;
+  animation: letterSlideUp 0.85s cubic-bezier(0.34, 1.25, 0.64, 1) forwards;
+}
+
+@keyframes letterSlideUp {
+  0% {
+    transform: translateY(80px) scale(0.9);
+    opacity: 0;
+  }
+  60% {
+    transform: translateY(-60px) scale(1.01);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-40px) scale(1);
+    opacity: 1;
+  }
 }
 
 .message-tape {
@@ -711,11 +750,18 @@ img { max-width: 100%; display: block; }
   bottom: 0;
   left: 0;
   right: 0;
-  height: 60%;
-  background: linear-gradient(180deg, rgba(223,241,250,0.9), var(--blue-light));
-  clip-path: polygon(0 100%, 50% 35%, 100% 100%);
+  height: 180px;
+  background: linear-gradient(180deg, rgba(223,241,250,0.95), var(--blue-light));
+  clip-path: polygon(0 100%, 50% 25%, 100% 100%);
   z-index: 3;
   pointer-events: none;
+  border-bottom-left-radius: var(--radius-md);
+  border-bottom-right-radius: var(--radius-md);
+  transition: opacity 0.5s ease;
+}
+
+.envelope.open .envelope-front {
+  opacity: 0.15;
 }
 
 .envelope-flap {
@@ -723,29 +769,30 @@ img { max-width: 100%; display: block; }
   top: 0;
   left: 0;
   right: 0;
-  height: 55%;
+  height: 150px;
   background: var(--blue-light);
   clip-path: polygon(0 0, 50% 100%, 100% 0);
   transform-origin: top center;
-  transition: transform 0.6s ease-in-out;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 4;
 }
 
 .envelope.open .envelope-flap {
   transform: rotateX(180deg);
   z-index: 1;
+  opacity: 0.2;
 }
 
 .wax-seal {
   position: absolute;
-  top: 50%;
+  top: 130px;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 72px;
-  height: 72px;
+  width: 74px;
+  height: 74px;
   border-radius: 50%;
-  background: radial-gradient(circle, #E53935 0%, #B71C1C 100%);
-  box-shadow: 0 8px 20px -4px rgba(183,28,28,0.5), inset 0 -3px 6px rgba(0,0,0,0.3);
+  background: radial-gradient(circle at 35% 35%, #EF5350 0%, #C62828 70%, #8E0000 100%);
+  box-shadow: 0 8px 22px -4px rgba(198,40,40,0.5), inset 0 -3px 6px rgba(0,0,0,0.35);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -759,7 +806,7 @@ img { max-width: 100%; display: block; }
 .wax-seal:active { transform: translate(-50%, -50%) scale(0.95); }
 
 .seal-emblem { font-size: 1.4rem; line-height: 1; }
-.seal-text { font-size: 0.55rem; font-weight: 700; letter-spacing: 0.05em; margin-top: 2px; margin-left: 18px;}
+.seal-text { font-size: 0.55rem; font-weight: 700; letter-spacing: 0.05em; margin-top: 2px; }
 
 .envelope.open .wax-seal {
   opacity: 0;
