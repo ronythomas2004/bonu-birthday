@@ -1889,8 +1889,21 @@ img { max-width: 100%; display: block; }
 .lightbox-prev { left: 18px; }
 .lightbox-next { right: 18px; }
 
-/* ============ RESPONSIVE ============ */
+/* ============ RESPONSIVE DESIGN FOR HERO & SITE ============ */
 @media (max-width: 780px) {
+  .hero {
+    min-height: 92vh;
+    padding: 50px 20px 60px;
+  }
+  .hero-title {
+    font-size: clamp(2.6rem, 9.5vw, 4.4rem);
+  }
+  .hero-sub-main {
+    font-size: 1.12rem;
+  }
+  .hero-sub-handwritten {
+    font-size: 1.55rem;
+  }
   .stats { gap: 36px; padding: 56px 20px; }
   .timeline { padding-left: 22px; }
   .timeline-item { padding-left: 20px; padding-bottom: 34px; }
@@ -1901,9 +1914,111 @@ img { max-width: 100%; display: block; }
 }
 
 @media (max-width: 560px) {
-  .hero { min-height: 90vh; padding: 36px 18px; }
-  .hero-title { font-size: clamp(2.5rem, 12vw, 3.6rem); }
-  .hero-sub { font-size: 0.98rem; }
+  .hero {
+    min-height: 88vh;
+    padding: 36px 14px 50px;
+  }
+  .hero-badge {
+    font-size: 0.74rem;
+    padding: 6px 16px;
+    gap: 6px;
+    margin-bottom: 18px;
+  }
+  .hero-title {
+    font-size: clamp(2.2rem, 10.5vw, 3.4rem);
+    margin-bottom: 12px;
+  }
+  .hero-crown {
+    top: -24px;
+    right: -4px;
+    font-size: 0.48em;
+  }
+  .hero-sub-main {
+    font-size: 0.98rem;
+    max-width: 320px;
+  }
+  .hero-sub-handwritten {
+    font-size: 1.38rem;
+  }
+  .hero-feature-pills {
+    gap: 6px;
+    margin: 16px 0 22px;
+  }
+  .hero-pill {
+    font-size: 0.76rem;
+    padding: 5px 12px;
+  }
+
+  /* Responsive Friendship Timer HUD Card */
+  .friendship-timer {
+    padding: 16px 14px;
+    border-radius: 20px;
+    margin-top: 4px;
+  }
+  .timer-header {
+    margin-bottom: 10px;
+  }
+  .timer-title {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+  }
+  .timer-grid {
+    gap: 5px;
+  }
+  .unit-box {
+    min-width: 52px;
+    padding: 7px 8px;
+    border-radius: 12px;
+  }
+  .unit-num {
+    font-size: 1.35rem;
+  }
+  .unit-lbl {
+    font-size: 0.62rem;
+    margin-top: 4px;
+  }
+  .timer-colon {
+    font-size: 1.1rem;
+    margin-top: -14px;
+  }
+  .timer-footer {
+    font-size: 0.72rem;
+    margin-top: 10px;
+  }
+
+  /* Responsive Mobile Hero Actions */
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+    max-width: 280px;
+    gap: 10px;
+    margin-top: 24px;
+  }
+  .btn-hero-primary,
+  .btn-hero-secondary {
+    width: 100%;
+    justify-content: center;
+    padding: 12px 22px;
+    font-size: 0.92rem;
+  }
+
+  /* Poppable Balloons Mobile Positioning */
+  .balloon {
+    width: 46px;
+    height: 58px;
+  }
+  .b1 { left: 4%; animation-duration: 14s; }
+  .b2 { left: 22%; animation-duration: 17s; }
+  .b3 { left: 46%; animation-duration: 13s; }
+  .b4 { left: 68%; animation-duration: 18s; }
+  .b5 { left: 86%; animation-duration: 15s; }
+
+  .hero-floater { font-size: 1.1rem; }
+  .f-1 { top: 12%; left: 4%; }
+  .f-2 { top: 25%; right: 4%; }
+  .f-3 { top: 72%; left: 4%; }
+  .f-4 { top: 78%; right: 4%; }
+
   .letter-card { padding: 34px 22px; }
   .journey-note-card { padding: 28px 22px; }
   .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 14px 10px; }
@@ -1914,8 +2029,6 @@ img { max-width: 100%; display: block; }
   .card-section { padding: 60px 16px 80px; }
   .download-btn { width: 100%; max-width: 320px; }
   .reasons-grid { grid-template-columns: repeat(2, 1fr); }
-  .timer-grid { gap: 12px; }
-  .unit-num { font-size: 1.35rem; }
 }
 
 /* ============ SCROLL REVEAL ============ */

@@ -429,10 +429,11 @@ const SoundEngine = (function () {
     });
   }
 
-  // 3. 3D Mouse Parallax Tilt Effect for Hero Card
+  // 3. 3D Parallax Tilt Effect for Hero Card (Mouse, Touch Drag & Mobile Gyroscope)
   const heroSec = document.getElementById("heroSection");
   const heroCard = document.querySelector(".hero-card-container");
   if (heroSec && heroCard && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    // Mouse movement parallax
     heroSec.addEventListener("mousemove", (e) => {
       const rect = heroSec.getBoundingClientRect();
       const x = e.clientX - rect.left - rect.width / 2;
@@ -447,6 +448,34 @@ const SoundEngine = (function () {
     heroSec.addEventListener("mouseleave", () => {
       heroCard.style.transform = "rotateX(0deg) rotateY(0deg)";
     });
+
+    // Touch drag tilt for mobile devices
+    heroSec.addEventListener("touchmove", (e) => {
+      if (!e.touches || e.touches.length === 0) return;
+      const touch = e.touches[0];
+      const rect = heroSec.getBoundingClientRect();
+      const x = touch.clientX - rect.left - rect.width / 2;
+      const y = touch.clientY - rect.top - rect.height / 2;
+
+      const tiltX = (y / rect.height) * -10;
+      const tiltY = (x / rect.width) * 10;
+
+      heroCard.style.transform = `rotateX(${tiltX.toFixed(2)}deg) rotateY(${tiltY.toFixed(2)}deg)`;
+    }, { passive: true });
+
+    heroSec.addEventListener("touchend", () => {
+      heroCard.style.transform = "rotateX(0deg) rotateY(0deg)";
+    });
+
+    // Gyroscope tilt on mobile hardware orientation
+    if (window.DeviceOrientationEvent) {
+      window.addEventListener("deviceorientation", (e) => {
+        if (e.gamma === null || e.beta === null) return;
+        const tiltY = Math.max(-12, Math.min(12, e.gamma / 2.5));
+        const tiltX = Math.max(-12, Math.min(12, (e.beta - 40) / 2.5));
+        heroCard.style.transform = `rotateX(${tiltX.toFixed(2)}deg) rotateY(${tiltY.toFixed(2)}deg)`;
+      }, { passive: true });
+    }
   }
 })();
 
