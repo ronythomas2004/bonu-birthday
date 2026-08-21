@@ -22,7 +22,9 @@ const CONFIG = {
 
   captions: [
     "after the train journey", "our 1st meetup aftr", "Hehe..", "that anointing day",
-    "the Chosen", "My smile starts from here", "aftr that iconic diori ride", "hmmmm",
+    "the Chosen",
+    "Wowww<br>My smile starts from here",
+    "aftr that iconic diori ride", "hmmmm",
     "that unforgettable beach day", "my fav pic of us 💛🩵"
   ],
   childhoodCaptions: [
@@ -100,28 +102,21 @@ const CONFIG = {
   ],
   reasons: [
     "You remember the small stuff nobody else does.",
+    "You brought smile to my face",
     "You always tell me the truth, even when it's easier not to.",
-    "Your laugh makes everyone else laugh too.",
-    "You show up. Every single time.",
-    "You never make me feel like too much.",
+    "Whenever I've needed someone to listen, guide, or stand by me, you've been right there without hesitation.",
+    "You always hear my blah blah blahh.",
     "You celebrate my wins like they're yours.",
     "You call instead of just texting when it actually matters.",
-    "You have zero chill and I love that about you.",
     "You give the best advice, even the advice I don't want to hear.",
-    "You remember birthdays, anniversaries, all of it.",
     "You've seen me at my worst and stayed anyway.",
-    "Your playlists are unreasonably good.",
     "You make ordinary days feel like something.",
     "You never let me spiral alone.",
     "You're the first person I want to tell good news to.",
-    "You're brutally honest about my outfit choices. I need that.",
     "You make friendship feel effortless.",
     "You still laugh at our oldest inside jokes.",
-    "You've never once made me feel unimportant.",
-    "You're chaotic in exactly the right amount.",
     "You'd drop everything if I actually needed you to.",
     "You make me a better, calmer version of myself.",
-    "You never keep score.",
     "You just get it, without me having to explain.",
     "You're you. That's genuinely the whole reason."
   ],
@@ -350,7 +345,7 @@ const SoundEngine = (function () {
 })();
 
 /* =========================================================
-   LIVE FRIENDSHIP COUNTER
+   LIVE FRIENDSHIP COUNTER & HERO INTERACTIONS
    ========================================================= */
 (function initFriendshipTimer() {
   const startDate = new Date(2024, 7, 2); // 2 years friendship baseline
@@ -360,6 +355,8 @@ const SoundEngine = (function () {
   const secsEl = document.getElementById("timerSecs");
 
   if (!daysEl) return;
+
+  let lastSecsStr = null;
 
   function update() {
     const now = new Date();
@@ -373,11 +370,84 @@ const SoundEngine = (function () {
     daysEl.textContent = days;
     hoursEl.textContent = String(hours).padStart(2, "0");
     minsEl.textContent = String(mins).padStart(2, "0");
-    secsEl.textContent = String(secs).padStart(2, "0");
+
+    const secsStr = String(secs).padStart(2, "0");
+    secsEl.textContent = secsStr;
+
+    if (lastSecsStr !== null && lastSecsStr !== secsStr) {
+      const secsBox = secsEl.closest(".unit-box");
+      if (secsBox) {
+        secsBox.classList.remove("tick");
+        void secsBox.offsetWidth; // trigger reflow
+        secsBox.classList.add("tick");
+      }
+    }
+    lastSecsStr = secsStr;
   }
 
   update();
   setInterval(update, 1000);
+})();
+
+/* Hero Parallax, Interactive Balloons, & Hero Confetti Button */
+(function initHeroInteractions() {
+  // 1. Interactive Poppable Balloons
+  const balloons = document.querySelectorAll(".balloon");
+  balloons.forEach((balloon) => {
+    balloon.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (balloon.classList.contains("popping")) return;
+      balloon.classList.add("popping");
+
+      // Play pop sound
+      if (typeof SoundEngine !== "undefined" && SoundEngine.playGiftPop) {
+        SoundEngine.playGiftPop();
+      }
+
+      // Launch small confetti burst at balloon position
+      if (typeof launchConfetti === "function") {
+        launchConfetti();
+      }
+
+      // Reset balloon after pop delay so it floats again
+      setTimeout(() => {
+        balloon.classList.remove("popping");
+      }, 4500);
+    });
+  });
+
+  // 2. Pop Confetti Hero Button
+  const confettiBtn = document.getElementById("heroConfettiBtn");
+  if (confettiBtn) {
+    confettiBtn.addEventListener("click", () => {
+      if (typeof launchConfetti === "function") {
+        launchConfetti();
+      }
+      if (typeof SoundEngine !== "undefined" && SoundEngine.playUnlockFanfare) {
+        SoundEngine.playUnlockFanfare();
+      }
+    });
+  }
+
+  // 3. 3D Mouse Parallax Tilt Effect for Hero Card
+  const heroSec = document.getElementById("heroSection");
+  const heroCard = document.querySelector(".hero-card-container");
+  if (heroSec && heroCard && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    heroSec.addEventListener("mousemove", (e) => {
+      const rect = heroSec.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+
+      const tiltX = (y / rect.height) * -12; // tilt angle X
+      const tiltY = (x / rect.width) * 12;   // tilt angle Y
+
+      heroCard.style.transform = `rotateX(${tiltX.toFixed(2)}deg) rotateY(${tiltY.toFixed(2)}deg)`;
+    });
+
+    heroSec.addEventListener("mouseleave", () => {
+      heroCard.style.transform = "rotateX(0deg) rotateY(0deg)";
+    });
+  }
 })();
 
 /* =========================================================
@@ -888,7 +958,7 @@ function drawBirthdayCard(styleName = "classic") {
 
     ctx.fillStyle = isDark ? "#FFFFFF" : "#16364A";
     ctx.font = "600 80px Fraunces, Georgia, serif";
-    ctx.fillText("Boni", w / 2, h * 0.5);
+    ctx.fillText("Bonu", w / 2, h * 0.5);
 
     ctx.fillStyle = isDark ? "#D9EFEF" : "#2B4E60";
     ctx.font = "400 22px Outfit, sans-serif";
@@ -1045,8 +1115,8 @@ function openLightbox(index) {
 function renderLightbox() {
   const photo = photoList[currentIndex];
   lightboxImg.src = photo.src;
-  lightboxImg.alt = photo.caption;
-  lightboxCaption.textContent = photo.caption;
+  lightboxImg.alt = photo.caption.replace(/<br\s*\/?>/gi, " ");
+  lightboxCaption.innerHTML = photo.caption;
 }
 
 function closeLightbox() {

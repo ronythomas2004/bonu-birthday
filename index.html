@@ -41,7 +41,7 @@
         </svg>
       </div>
       <p class="lock-eyebrow">a little something for</p>
-      <h1 class="lock-name">Boni</h1>
+      <h1 class="lock-name">Bonu😉</h1>
       <p class="lock-hint">enter the code to open it</p>
 
       <div class="pin-dots" id="pinDots" aria-hidden="true">
@@ -69,7 +69,7 @@
         <button type="button" class="key key-del" id="keyDel" aria-label="Delete">⌫</button>
       </div>
 
-      <p class="lock-error" id="lockError">not quite — try again</p>
+      <p class="lock-error" id="lockError">not quite - try again</p>
     </div>
 
     <p class="lock-footer">U know how to unlock 😉</p>
@@ -81,35 +81,105 @@
     <canvas id="confettiCanvas" class="confetti-canvas" aria-hidden="true"></canvas>
 
     <!-- HERO -->
-    <section class="hero">
+    <section class="hero" id="heroSection">
+      <div class="hero-bg-blobs" aria-hidden="true">
+        <div class="hero-blob blob-1"></div>
+        <div class="hero-blob blob-2"></div>
+        <div class="hero-blob blob-3"></div>
+      </div>
       <div class="hero-sparkles-bg" aria-hidden="true"></div>
+
+      <!-- Interactive Floaters & Poppable Balloons -->
       <div class="floaters" aria-hidden="true">
-        <span class="balloon b1"></span>
-        <span class="balloon b2"></span>
-        <span class="balloon b3"></span>
-        <span class="balloon b4"></span>
+        <div class="balloon b1" data-balloon-id="1" title="Click to pop me! 🎈"></div>
+        <div class="balloon b2" data-balloon-id="2" title="Click to pop me! 🎈"></div>
+        <div class="balloon b3" data-balloon-id="3" title="Click to pop me! 🎈"></div>
+        <div class="balloon b4" data-balloon-id="4" title="Click to pop me! 🎈"></div>
+        <div class="balloon b5" data-balloon-id="5" title="Click to pop me! 🎈"></div>
+
+        <span class="hero-floater f-1">✨</span>
+        <span class="hero-floater f-2">💙</span>
+        <span class="hero-floater f-3">👑</span>
+        <span class="hero-floater f-4">🎂</span>
+        <span class="hero-floater f-5">⭐</span>
       </div>
 
-      <h1 class="hero-title">Happy Birthday,<br><span class="hero-name">Boni</span></h1>
-      <p class="hero-sub">every year you get one year cooler. unfair, honestly.</p>
+      
 
-      <!-- LIVE FRIENDSHIP COUNTER -->
-      <div class="friendship-timer" id="friendshipTimer">
-        <p class="timer-title">TIME SPENT BEING BESTIES</p>
-        <div class="timer-grid">
-          <div class="timer-unit"><span id="timerDays" class="unit-num">738</span><span class="unit-lbl">Days</span>
+        <!-- Main Title -->
+        <h1 class="hero-title">
+          <span class="title-greeting">Happy Birthday,</span>
+          <span class="hero-name-container">
+            <span class="hero-crown" aria-hidden="true">👑</span>
+            <span class="hero-name">Bonu</span>
+            <!-- <span class="hero-sparkle" aria-hidden="true">✨</span> -->
+          </span>
+        </h1>
+
+        <!-- Subtext -->
+        <p class="hero-sub hero-sub-main">Every year you get one year cooler. Unfair, honestly! 😉</p>
+        <p class="hero-sub hero-sub-handwritten">A little surprise created just for you 💙</p>
+
+       
+
+        <!-- LIVE FRIENDSHIP COUNTER CARD -->
+        <div class="friendship-timer" id="friendshipTimer">
+          <div class="timer-header">
+            <span class="timer-sparkle"></span>
+            <p class="timer-title">TIME SPENT BEING BEST FRNDS 🫶</p>
+            <span class="timer-sparkle"></span>
           </div>
-          <div class="timer-unit"><span id="timerHours" class="unit-num">17</span><span class="unit-lbl">Hours</span>
+          <div class="timer-grid">
+            <div class="timer-unit">
+              <div class="unit-box">
+                <span id="timerDays" class="unit-num">738</span>
+              </div>
+              <span class="unit-lbl">Days</span>
+            </div>
+            <span class="timer-colon">:</span>
+            <div class="timer-unit">
+              <div class="unit-box">
+                <span id="timerHours" class="unit-num">17</span>
+              </div>
+              <span class="unit-lbl">Hours</span>
+            </div>
+            <span class="timer-colon">:</span>
+            <div class="timer-unit">
+              <div class="unit-box">
+                <span id="timerMins" class="unit-num">42</span>
+              </div>
+              <span class="unit-lbl">Mins</span>
+            </div>
+            <span class="timer-colon">:</span>
+            <div class="timer-unit">
+              <div class="unit-box unit-secs-box">
+                <span id="timerSecs" class="unit-num">09</span>
+              </div>
+              <span class="unit-lbl">Secs</span>
+            </div>
           </div>
-          <div class="timer-unit"><span id="timerMins" class="unit-num">42</span><span class="unit-lbl">Mins</span>
-          </div>
-          <div class="timer-unit"><span id="timerSecs" class="unit-num">09</span><span class="unit-lbl">Secs</span>
-          </div>
+          <p class="timer-footer">Counting every second since Aug 2, 2024 💙</p>
+        </div>
+
+        <!-- HERO CALL TO ACTIONS -->
+        <div class="hero-actions">
+          <a href="#story" class="btn-hero-primary">
+            <span>Explore Our Story</span>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <polyline points="19 12 12 19 5 12"></polyline>
+            </svg>
+          </a>
+          <button type="button" id="heroConfettiBtn" class="btn-hero-secondary">
+            <span>🎉 Pop Confetti!</span>
+          </button>
         </div>
       </div>
 
+      <!-- SCROLL CUE -->
       <a href="#story" class="scroll-cue" aria-label="Scroll to story">
         <span></span>
+        <small class="scroll-cue-text">Scroll down</small>
       </a>
     </section>
 
@@ -177,19 +247,51 @@
           <div class="envelope-back"></div>
           <div class="letter-card" id="letterCard">
             <span class="message-tape" aria-hidden="true"></span>
-            <p class="message-to">To Boni,</p>
-            <div class="message-body" id="messageBody">
-              <p>Two years ago I had no idea how much you'd end up meaning to me — and now I genuinely can't imagine the
-                last two years without you in them. Somewhere between the late-night texts, the random calls for no
-                reason at all, and the plans that always somehow worked out, you became one of my favourite people to
-                know.</p>
-              <p>You have this way of making ordinary days feel like something worth remembering. I don't say it enough,
-                so I'm saying it here, in light blue, because it's your colour: I'm really lucky to have you as my best
-                friend.</p>
-              <p>Here's to another year of chaos, comfort, and everything in between. I hope this year gives you every
-                single thing you deserve — and I hope you know I'll be right here for it, like always.</p>
-            </div>
-            <p class="message-sign">— with love, always 🩵</p>
+            <p class="message-to">To Bonuuuu😁✨,</p>
+          
+<div class="message-body" id="messageBody">
+  <p>Angne 20 vayasayi.. Velya chechi aayi.. Welcome to the 20’s😁✨</p>
+
+  <p>And yeah… 2 years ago, I had no idea how much you’d end up meaning to me - the expected unexpected entry into my small circle. And now, I genuinely can’t imagine the last two years without you in them.</p>
+
+  <p>Somewhere between the late-night texts, the random calls for absolutely no reason, the plans that somehow always worked out, and the T or D’s, you became one of my favourite people to know.</p>
+
+  <p>As I said once… I still wonder how we’re even friends😂. There were 100 reasons not to be, but there were 1000 reasons to be friends. U will be the one who would have seen my every side.. The introvert me, the extrovert me, the sad me, the happy me, the failure me... everything..</p>
+
+  <p>You’re the one who brought a smile to my face, my eye-opener, my personal resource, and the one I could cry out to when things got hard.</p>
+
+  <p>You never knew it… but you saved me.</p>
+
+  <p>You thought we were just talking. I was surviving.<br>
+  You thought your messages were ordinary. They became reasons for me to keep going.<br>
+  You thought you were just being a good friend. You were giving me something I had been missing for years.</p>
+
+  <p>Those late-night talks, even when we both knew we’d be tired the next day… I genuinely love talking to you, even when there’s absolutely nothing to talk about. I really miss those days when we used to play T or D’s🫣. I know it’s because of our busy schedules now, but yeah… I really miss it👩🏻‍🦯.</p>
+
+  <p>I honestly never knew I could talk for hours. You somehow unlocked the talkative side of me😂. Even when I’m just blah blah-ing complete nonsense, I still love talking to you.</p>
+
+  <p>I really enjoyed every time we met. And among all those moments, I especially loved our beach day and the day we went on the scooter. And the main part… noticing all those little things on the day we met and then sharing them with each other afterwards… that was really wow.</p>
+
+  <p>The mandhi we had together, the gifts we gave each other, and the way you remember even the smallest details about me… those things genuinely mean a lot to me.</p>
+
+  <p>And the most important thing…</p>
+
+  <p>You led me closer to Jesus.</p>
+
+  <p>Whether you know it or not, you’ve played a very important role in my faith journey. By uplifting me every time I went down, by sharing your experiences and insights, and by simply being there… you helped me a lot.</p>
+
+  <p>The current me - in every aspect, in my faith, personal life, and spiritual life - you played a very important role in moulding me😌.</p>
+
+  <p>And sometimes… the things you do hurt me a little bit. Maybe a large bit sometimes🫣😂. But the patch-ups afterwards, the effort you put into solving things instead of just ending the friendship as it is… I really appreciate that.</p>
+
+  <p>Because honestly, I don’t want this to end.</p>
+  <p>I hope, even after all the busy schedules, random fights, misunderstandings, nonsense conversations, and everything else life throws at us… we’ll still somehow remain the same friends.</p>
+  <p>And once again…</p>
+  <p>Happiest Birthday, Bonuuuu😁❤️</p>
+</div>
+
+<p class="message-sign"> - Your inverter friend 🩵</p>
+
           </div>
           <div class="envelope-front"></div>
           <div class="envelope-flap" id="envelopeFlap"></div>
@@ -226,7 +328,7 @@
         <div class="gift-reveal-card" id="giftRevealCard" hidden>
           <div class="gift-reveal-badge">🎁 BEST FRIEND CERTIFICATE</div>
           <h3>Official Lifetime Pass</h3>
-          <p>This certifies that <strong>Boniface</strong> is entitled to 365 days of unconditional support, unlimited
+          <p>This certifies that <strong>Bonu</strong> is entitled to 365 days of unconditional support, unlimited
             catchups, honest outfit checks, and 2 AM emergency laughter calls!</p>
           <div class="gift-sparkles">✨ 🩵 🎉 👑 ✨</div>
         </div>
@@ -298,7 +400,7 @@
         here helping you chase it anyway. 🩵
       </p>
 
-      <!-- WISH JAR -->
+      <!-- WISH JAR
       <div class="wish-jar-wrapper">
         <button type="button" id="wishJarBtn" class="wish-jar-btn">
           <span class="jar-icon">🫙</span>
@@ -314,7 +416,7 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
 
     <!-- QUOTES
     <section class="quotes-section reveal" id="quotesSection">
@@ -345,7 +447,7 @@
         <span class="message-tape" aria-hidden="true"></span>
         <p class="journey-note-title">our journey</p>
         <p class="journey-note-text" id="journeyMessage">From strangers to best friends in two years - and somehow every
-          one of these photos still makes me laugh, or tear up a little, or both. Thank you for every single memory on
+          one of these photos still makes me laugh. Thank you for every single memory on
           this list, and for all the ones we haven't made yet. Photos from the days we met</p>
       </div>
 
