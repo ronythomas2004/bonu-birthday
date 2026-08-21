@@ -41,7 +41,7 @@
         </svg>
       </div>
       <p class="lock-eyebrow">a little something for</p>
-      <h1 class="lock-name">Bonu</h1>
+      <h1 class="lock-name">Bonu😉</h1>
       <p class="lock-hint">enter the code to open it</p>
 
       <div class="pin-dots" id="pinDots" aria-hidden="true">
@@ -81,105 +81,37 @@
     <canvas id="confettiCanvas" class="confetti-canvas" aria-hidden="true"></canvas>
 
     <!-- HERO -->
-    <section class="hero" id="heroSection">
-      <div class="hero-bg-blobs" aria-hidden="true">
-        <div class="hero-blob blob-1"></div>
-        <div class="hero-blob blob-2"></div>
-        <div class="hero-blob blob-3"></div>
-      </div>
+    <section class="hero">
       <div class="hero-sparkles-bg" aria-hidden="true"></div>
-
-      <!-- Interactive Floaters & Poppable Balloons -->
       <div class="floaters" aria-hidden="true">
-        <div class="balloon b1" data-balloon-id="1" title="Click to pop me! 🎈"></div>
-        <div class="balloon b2" data-balloon-id="2" title="Click to pop me! 🎈"></div>
-        <div class="balloon b3" data-balloon-id="3" title="Click to pop me! 🎈"></div>
-        <div class="balloon b4" data-balloon-id="4" title="Click to pop me! 🎈"></div>
-        <div class="balloon b5" data-balloon-id="5" title="Click to pop me! 🎈"></div>
-
-        <span class="hero-floater f-1">✨</span>
-        <span class="hero-floater f-2">💙</span>
-        <span class="hero-floater f-3">👑</span>
-        <span class="hero-floater f-4">🎂</span>
-        <span class="hero-floater f-5">⭐</span>
+        <span class="balloon b1"></span>
+        <span class="balloon b2"></span>
+        <span class="balloon b3"></span>
+        <span class="balloon b4"></span>
       </div>
 
-      
+      <h1 class="hero-title">Happy Birthday,<br><span class="hero-name">Bonu</span></h1>
+      <p class="hero-sub">Every year you get one year cooler. unfair, honestly.</p>
+      <p class="hero-sub">A Little suprise for youu.</p>
 
-        <!-- Main Title -->
-        <h1 class="hero-title">
-          <span class="title-greeting">Happy Birthday,</span>
-          <span class="hero-name-container">
-            <span class="hero-crown" aria-hidden="true">👑</span>
-            <span class="hero-name">Bonu</span>
-            <!-- <span class="hero-sparkle" aria-hidden="true">✨</span> -->
-          </span>
-        </h1>
 
-        <!-- Subtext -->
-        <p class="hero-sub hero-sub-main">Every year you get one year cooler. Unfair, honestly! 😉</p>
-        <p class="hero-sub hero-sub-handwritten">A little surprise created just for you 💙</p>
-
-       
-
-        <!-- LIVE FRIENDSHIP COUNTER CARD -->
-        <div class="friendship-timer" id="friendshipTimer">
-          <div class="timer-header">
-            <span class="timer-sparkle"></span>
-            <p class="timer-title">TIME SPENT BEING BEST FRNDS 🫶</p>
-            <span class="timer-sparkle"></span>
+      <!-- LIVE FRIENDSHIP COUNTER -->
+      <div class="friendship-timer" id="friendshipTimer">
+        <p class="timer-title">TIME SPENT BEING BESTIES</p>
+        <div class="timer-grid">
+          <div class="timer-unit"><span id="timerDays" class="unit-num">738</span><span class="unit-lbl">Days</span>
           </div>
-          <div class="timer-grid">
-            <div class="timer-unit">
-              <div class="unit-box">
-                <span id="timerDays" class="unit-num">738</span>
-              </div>
-              <span class="unit-lbl">Days</span>
-            </div>
-            <span class="timer-colon">:</span>
-            <div class="timer-unit">
-              <div class="unit-box">
-                <span id="timerHours" class="unit-num">17</span>
-              </div>
-              <span class="unit-lbl">Hours</span>
-            </div>
-            <span class="timer-colon">:</span>
-            <div class="timer-unit">
-              <div class="unit-box">
-                <span id="timerMins" class="unit-num">42</span>
-              </div>
-              <span class="unit-lbl">Mins</span>
-            </div>
-            <span class="timer-colon">:</span>
-            <div class="timer-unit">
-              <div class="unit-box unit-secs-box">
-                <span id="timerSecs" class="unit-num">09</span>
-              </div>
-              <span class="unit-lbl">Secs</span>
-            </div>
+          <div class="timer-unit"><span id="timerHours" class="unit-num">17</span><span class="unit-lbl">Hours</span>
           </div>
-          <p class="timer-footer">Counting every second since Aug 2, 2024 💙</p>
-        </div>
-
-        <!-- HERO CALL TO ACTIONS -->
-        <div class="hero-actions">
-          <a href="#story" class="btn-hero-primary">
-            <span>Explore Our Story</span>
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="12" y1="5" x2="12" y2="19"></line>
-              <polyline points="19 12 12 19 5 12"></polyline>
-            </svg>
-          </a>
-          <button type="button" id="heroConfettiBtn" class="btn-hero-secondary">
-            <span>🎉 Pop Confetti!</span>
-          </button>
+          <div class="timer-unit"><span id="timerMins" class="unit-num">42</span><span class="unit-lbl">Mins</span>
+          </div>
+          <div class="timer-unit"><span id="timerSecs" class="unit-num">09</span><span class="unit-lbl">Secs</span>
+          </div>
         </div>
       </div>
 
-      <!-- SCROLL CUE -->
       <a href="#story" class="scroll-cue" aria-label="Scroll to story">
         <span></span>
-        <small class="scroll-cue-text">Scroll down</small>
       </a>
     </section>
 

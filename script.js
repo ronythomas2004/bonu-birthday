@@ -345,7 +345,7 @@ const SoundEngine = (function () {
 })();
 
 /* =========================================================
-   LIVE FRIENDSHIP COUNTER & HERO INTERACTIONS
+   LIVE FRIENDSHIP COUNTER
    ========================================================= */
 (function initFriendshipTimer() {
   const startDate = new Date(2024, 7, 2); // 2 years friendship baseline
@@ -355,8 +355,6 @@ const SoundEngine = (function () {
   const secsEl = document.getElementById("timerSecs");
 
   if (!daysEl) return;
-
-  let lastSecsStr = null;
 
   function update() {
     const now = new Date();
@@ -370,113 +368,11 @@ const SoundEngine = (function () {
     daysEl.textContent = days;
     hoursEl.textContent = String(hours).padStart(2, "0");
     minsEl.textContent = String(mins).padStart(2, "0");
-
-    const secsStr = String(secs).padStart(2, "0");
-    secsEl.textContent = secsStr;
-
-    if (lastSecsStr !== null && lastSecsStr !== secsStr) {
-      const secsBox = secsEl.closest(".unit-box");
-      if (secsBox) {
-        secsBox.classList.remove("tick");
-        void secsBox.offsetWidth; // trigger reflow
-        secsBox.classList.add("tick");
-      }
-    }
-    lastSecsStr = secsStr;
+    secsEl.textContent = String(secs).padStart(2, "0");
   }
 
   update();
   setInterval(update, 1000);
-})();
-
-/* Hero Parallax, Interactive Balloons, & Hero Confetti Button */
-(function initHeroInteractions() {
-  // 1. Interactive Poppable Balloons
-  const balloons = document.querySelectorAll(".balloon");
-  balloons.forEach((balloon) => {
-    balloon.addEventListener("click", (e) => {
-      e.stopPropagation();
-      if (balloon.classList.contains("popping")) return;
-      balloon.classList.add("popping");
-
-      // Play pop sound
-      if (typeof SoundEngine !== "undefined" && SoundEngine.playGiftPop) {
-        SoundEngine.playGiftPop();
-      }
-
-      // Launch small confetti burst at balloon position
-      if (typeof launchConfetti === "function") {
-        launchConfetti();
-      }
-
-      // Reset balloon after pop delay so it floats again
-      setTimeout(() => {
-        balloon.classList.remove("popping");
-      }, 4500);
-    });
-  });
-
-  // 2. Pop Confetti Hero Button
-  const confettiBtn = document.getElementById("heroConfettiBtn");
-  if (confettiBtn) {
-    confettiBtn.addEventListener("click", () => {
-      if (typeof launchConfetti === "function") {
-        launchConfetti();
-      }
-      if (typeof SoundEngine !== "undefined" && SoundEngine.playUnlockFanfare) {
-        SoundEngine.playUnlockFanfare();
-      }
-    });
-  }
-
-  // 3. 3D Parallax Tilt Effect for Hero Card (Mouse, Touch Drag & Mobile Gyroscope)
-  const heroSec = document.getElementById("heroSection");
-  const heroCard = document.querySelector(".hero-card-container");
-  if (heroSec && heroCard && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    // Mouse movement parallax
-    heroSec.addEventListener("mousemove", (e) => {
-      const rect = heroSec.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
-
-      const tiltX = (y / rect.height) * -12; // tilt angle X
-      const tiltY = (x / rect.width) * 12;   // tilt angle Y
-
-      heroCard.style.transform = `rotateX(${tiltX.toFixed(2)}deg) rotateY(${tiltY.toFixed(2)}deg)`;
-    });
-
-    heroSec.addEventListener("mouseleave", () => {
-      heroCard.style.transform = "rotateX(0deg) rotateY(0deg)";
-    });
-
-    // Touch drag tilt for mobile devices
-    heroSec.addEventListener("touchmove", (e) => {
-      if (!e.touches || e.touches.length === 0) return;
-      const touch = e.touches[0];
-      const rect = heroSec.getBoundingClientRect();
-      const x = touch.clientX - rect.left - rect.width / 2;
-      const y = touch.clientY - rect.top - rect.height / 2;
-
-      const tiltX = (y / rect.height) * -10;
-      const tiltY = (x / rect.width) * 10;
-
-      heroCard.style.transform = `rotateX(${tiltX.toFixed(2)}deg) rotateY(${tiltY.toFixed(2)}deg)`;
-    }, { passive: true });
-
-    heroSec.addEventListener("touchend", () => {
-      heroCard.style.transform = "rotateX(0deg) rotateY(0deg)";
-    });
-
-    // Gyroscope tilt on mobile hardware orientation
-    if (window.DeviceOrientationEvent) {
-      window.addEventListener("deviceorientation", (e) => {
-        if (e.gamma === null || e.beta === null) return;
-        const tiltY = Math.max(-12, Math.min(12, e.gamma / 2.5));
-        const tiltX = Math.max(-12, Math.min(12, (e.beta - 40) / 2.5));
-        heroCard.style.transform = `rotateX(${tiltX.toFixed(2)}deg) rotateY(${tiltY.toFixed(2)}deg)`;
-      }, { passive: true });
-    }
-  }
 })();
 
 /* =========================================================
